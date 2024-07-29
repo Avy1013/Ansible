@@ -4,7 +4,7 @@
   become: true
   tasks:
   
-  - name: install apache and php for my servers
+  - name: ansible task
     apt:
       name:
         - nginx
@@ -23,4 +23,14 @@
       name:
         - apache2
       state: present
-      update_cache: yes  
+      update_cache: yes
+
+  - name: copy task
+    tags: copy
+    copy:
+      src: files/site.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644  
+
