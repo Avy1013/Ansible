@@ -1,0 +1,26 @@
+---
+
+- hosts: ansible
+  become: true
+  tasks:
+  
+  - name: install apache and php for my servers
+    apt:
+      name:
+        - nginx
+        - apache2
+      state: absent
+      update_cache: yes
+
+
+- hosts: web_server
+  become: true
+  tags: testing  
+  tasks: 
+
+  - name: installing apache on server
+    apt:
+      name:
+        - apache2
+      state: present
+      update_cache: yes  

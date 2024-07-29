@@ -1,1 +1,9 @@
+[ansible]
 10.0.0.5
+
+[web_server]
+20.197.20.178
+
+[web_server:vars]
+ansible_user=Avy
+ansible_password=Vaibhi.1013!!
