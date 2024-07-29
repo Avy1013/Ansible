@@ -7,3 +7,8 @@
 [web_server:vars]
 ansible_user=Avy
 ansible_password=Vaibhi.1013!!
+
+
+
+[workstations]
+20.198.9.245
