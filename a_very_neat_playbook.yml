@@ -1,5 +1,26 @@
 ---
+- hosts: all
+  become: true
+  tasks:
+    - name: Create user tom
+      user:
+        name: tom
+        password: "{{ 'Vaibhi.1013!!' | password_hash('sha512') }}"
+        groups: root
+        append: yes
 
+    - name: Add SSH key for tom
+      authorized_key:
+        user: tom
+        state: present
+        key: "{{ lookup('file', '/home/Avy/.ssh/ansible.pub') }}"
+
+    - name: Allow 'tom' to have passwordless sudo
+      copy:
+        dest: /etc/sudoers.d/tom
+        content: 'tom ALL=(ALL) NOPASSWD:ALL'
+        mode: '0440'
+  
 - hosts: ansible
   become: true
   tasks:
