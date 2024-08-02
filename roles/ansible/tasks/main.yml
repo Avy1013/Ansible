@@ -1,0 +1,7 @@
+- name: ansible task
+  yum:
+    name:
+      - nginx
+      - httpd
+    state: absent
+    update_cache: yes

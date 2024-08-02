@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+  roles:
+    - base
+- hosts: ansible
+  become: true
+  roles:
+    - ansible
+
+- hosts: web_server
+  become: true
+  tags: testing  
+  roles:
+    - web_server   
+
+- hosts: workstation
+  become: true 
+  roles:
+    - workstation  

@@ -1,0 +1,22 @@
+- name: installing apache on server
+  yum:
+    name:
+      - httpd
+    state: present
+    update_cache: yes
+
+- name: copy task
+  tags: copy
+  copy:
+    src: site.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644
+
+- name: start httpd (Rhel)
+  tags: apache, centos, httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes
