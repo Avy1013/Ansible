@@ -1,14 +1,11 @@
 [ansible]
-10.0.0.5
+52.66.17.70
 
 [web_server]
-20.197.20.178
+65.0.31.147
+[workstation]
+20.51.210.48
 
-
-[web_server:vars]
+[workstation:vars]
 ansible_user=Avy
 ansible_password=Vaibhi.1013!!
-
-
-[workstations]
-20.198.9.245
