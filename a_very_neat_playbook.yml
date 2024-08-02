@@ -26,10 +26,10 @@
   tasks:
   
   - name: ansible task
-    apt:
+    yum:
       name:
         - nginx
-        - apache2
+        - httpd
       state: absent
       update_cache: yes
 
@@ -40,9 +40,9 @@
   tasks: 
 
   - name: installing apache on server
-    apt:
+    yum:
       name:
-        - apache2
+        - httpd
       state: present
       update_cache: yes
 
@@ -53,7 +53,14 @@
       dest: /var/www/html/index.html
       owner: root
       group: root
-      mode: 0644  
+      mode: 0644
+
+  - name: start httpd (Rhel)
+    tags: apache, centos, httpd 
+    service:
+      name: httpd
+      state: started
+      
 
 - hosts: workstations
   become: true
