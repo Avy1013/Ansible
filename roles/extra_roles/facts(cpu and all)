@@ -1,17 +1,17 @@
-- name: Gather and save system facts to CSV
-  hosts: all
-  tasks:
-    - name: Gather facts
-      setup:
+# roles/system_facts/tasks/main.yml
+---
+- name: Display CPU model
+  debug:
+    msg: "CPU Model: {{ ansible_facts['processor'][0] }}"
 
-    - name: Create CSV content
-      set_fact:
-        csv_content: |
-          CPU Model, {{ ansible_processor[0] }}
-          Total Memory, {{ ansible_memtotal_mb }} MB
-          Disk Info, {{ ansible_mounts | map(attribute='mount') | join('; ') }}
+- name: Display total memory
+  debug:
+    msg: "Total Memory: {{ ansible_facts['memtotal_mb'] }} MB"
 
-    - name: Save facts to CSV file
-      copy:
-        content: "{{ csv_content }}"
-        dest: "{{ playbook_dir }}/system_facts.csv"
+- name: Display disk mount points
+  debug:
+    msg: >
+      Disk Mount Points: 
+      {% for mount in ansible_facts['mounts'] %}
+        - {{ mount.mount }}
+      {% endfor %}
