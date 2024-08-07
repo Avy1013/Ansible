@@ -1,0 +1,29 @@
+---
+- name: Install and configure sysstat
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Install sysstat
+      yum:
+        name: sysstat
+        state: present
+
+    - name: Enable and start sysstat service
+      systemd:
+        name: sysstat
+        enabled: yes
+        state: started
+
+    - name: Ensure sysstat is configured to collect data
+      lineinfile:
+        path: /etc/sysconfig/sysstat
+        regexp: '^ENABLED="false"$'
+        line: 'ENABLED="true"'
+      notify:
+        - Restart sysstat
+
+  handlers:
+    - name: Restart sysstat
+      systemd:
+        name: sysstat
+        state: restarted
