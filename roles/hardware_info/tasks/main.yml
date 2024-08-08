@@ -1,0 +1,15 @@
+- name: Display CPU model
+  debug:
+    msg: "CPU Model: {{ ansible_facts['processor'][0] }}"
+
+- name: Display total memory
+  debug:
+    msg: "Total Memory: {{ ansible_facts['memtotal_mb'] }} MB"
+
+- name: Display disk mount points
+  debug:
+    msg: >
+      Disk Mount Points: 
+      {% for mount in ansible_facts['mounts'] %}
+        - {{ mount.mount }}
+      {% endfor %}

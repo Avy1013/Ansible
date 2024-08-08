@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Array of available roles
-roles=("ansible" "base" "web_server" "workstation""ping")
+roles=("ansible" "base" "web_server" "workstation" "ping" "hardware_info" "sysstat")
 
 # Display menu
 echo "Select roles to include in the playbook (e.g., 1,2):"

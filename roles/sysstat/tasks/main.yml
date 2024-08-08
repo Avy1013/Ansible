@@ -1,0 +1,15 @@
+# Ensure cron job is configured for sysstat
+- name: Ensure sysstat cron job is configured
+  cron:
+    name: "Collect system metrics every 30 minutes"
+    minute: "*/30"
+    user: root
+    job: "/usr/lib64/sa/sa1 1 1"
+
+# Create script to calculate weekly averages
+#- name: Create calculate_weekly_averages.sh script
+#  copy:
+#    src: calculate_weekly_averages.sh
+#    dest: /usr/local/bin/calculate_weekly_averages.sh
+#    mode: '0755'
+
