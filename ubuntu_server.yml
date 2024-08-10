@@ -1,0 +1,29 @@
+- name: Setup Apache on Ubuntu server
+  hosts: d
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Copy site.html to Apache document root
+      tags: copy
+      copy:
+        src: site.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Start Apache service
+      tags: apache, ubuntu, apache2
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
